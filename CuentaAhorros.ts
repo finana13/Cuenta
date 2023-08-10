@@ -5,7 +5,7 @@ export class CuentaAhorro extends Cuenta{
 
     constructor(saldo :number,tasa_anual: number){
         super(saldo,tasa_anual)
-        this.estado = true
+        this.estado = saldo >= 30000
     }
     setEstado(){
         return this.estado 
@@ -15,19 +15,34 @@ export class CuentaAhorro extends Cuenta{
         this.estado = estado
     }
 
-    retirar(){
+    retirar(monto: number){
+        if (this.estado) {
+            super.retirar(monto);
+          } else {
+            console.log("No se puede hacer el retiro");
+          }
 
     }
     
-    consignar(){
-        
+    consignar(monto: number){
+                if(this.estado){
+            super.consignar(monto)
+        }else{
+            console.log("Cuenta inactiva")
+        }
     }
 
     extracto(){
+        if (this.num_retir > 4) {
+            this.comision_mensual += 2000;
+          }
+          super.extracto();
         
     }
 
     imprimirDatosAhorros(){
+        super.imprimirDatosCuenta()
+        console.log("Activa: "+this.estado)
         
     }
 }

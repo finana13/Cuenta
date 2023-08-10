@@ -53,23 +53,47 @@ export class Cuenta{
         this.comision_mensual= comision_mensual
     }
 
-    consignar(){
+    consignar(monto:number){
+        if(monto> 0){
+            this.saldo+= monto
+            this.num_consig++
+        }else{
+            console.log("El monto de la consignacion debe ser mayor a cero")
+        }
 
     }
 
-    retirar(){
+    retirar(monto:number){
+        if(monto> 0 && monto>= this.saldo){
+            this.saldo-= monto
+            this.num_consig++
+        }else{
+            console.log ("Monto invalido")
+        }
 
     }
 
     calcular(){
+        const int_men =(this.saldo *this.tasa_anual)/12/100
+        this.saldo += int_men
 
     }
 
     extracto(){
+        this.saldo -= this.comision_mensual
+        this.calcular()
+        console.log ("Extracto mensual")
+        this.imprimirDatosCuenta()
+
 
     }
 
     imprimirDatosCuenta(){
+        console.log ("Monto:" +this.saldo)
+        console.log ("Comision mensual:" +this.comision_mensual)
+        console.log ("Numero de consignaciones:" +this.num_consig)
+        console.log ("Numero de retiros:"+this.num_retir)
+
 
     }
     

@@ -66,7 +66,7 @@ export class Cuenta{
     retirar(monto:number){
         if(monto> 0 && monto>= this.saldo){
             this.saldo-= monto
-            this.num_consig++
+            this.num_retir++
         }else{
             console.log ("Monto invalido")
         }
